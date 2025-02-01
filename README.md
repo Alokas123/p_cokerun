@@ -5,6 +5,7 @@
 - Opening boxes and getting cocaine
 - Preventing police to start mission and police notify
 - Making script overall better
+- Preview
 
 # Feel free to distrupute :)
 
