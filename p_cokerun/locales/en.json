@@ -1,0 +1,16 @@
+{
+    "start_mission": "Start Mission",
+    "cooldown_wait": "Please wait! You must wait before starting another mission.",
+    "already_havemission": "I already gave you a mission! I don't have more packets for you at the moment.",
+    "not_enough_money": "You don't have enough money to start this mission!",
+    "unknown_error": "An unknown error occurred.",
+    "mission_start_message": "Mission started! Check your phone for details.",
+    "pickup_package": "Pick Up Package",
+    "picking_up_packet": "Picking up the package...",
+    "packet_received": "Package received! You need %s more.",
+    "all_packets_received": "You have collected all packages!",
+    "pickup_warning": "You already have a package or reached the limit!",
+    "mission_start_alert": "Would you like to have a mission? You just need to pay $%s first",
+    "didintwanttostart": "Go away then!",
+    "hello": "l have an offer!"
+}
