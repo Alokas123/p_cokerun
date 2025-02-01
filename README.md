@@ -13,3 +13,4 @@
 - [ox_lib](https://github.com/overextended/ox_lib)
 - [ox_target](https://github.com/overextended/ox_targer)
 - [ox_inventory](https://github.com/overextended/ox_inventory)
+- [npwd](https://github.com/project-error/npwd)
