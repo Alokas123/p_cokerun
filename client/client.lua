@@ -4,12 +4,12 @@ local ConfigClient = require 'config/cl_config'
 local hasStarted = false
 local TookPackets = 0
 local pickupZone = nil
-local phonenumber = exports.npwd:getPhoneNumber()
 
 local function RemovePickupZone()
     if pickupZone then
         exports.ox_target:removeZone(pickupZone)
         pickupZone = nil
+        hasStarted = false
     end
 end
 
@@ -30,7 +30,7 @@ local function Pickup()
                     onSelect = function()
                         local packets = exports.ox_inventory:Search('count', packetItem)
                         if packets < 1 and TookPackets < 5 then
-                            if lib.progressBar({ duration = 2000, label = locale("picking_up_packet"), useWhileDead = true }) then
+                            if lib.progressBar({ duration = 2000, label = locale("picking_up_packet"), disable = { car = true, move = true, combat = true, mouse = false}}) then
                                 lib.callback('givepacket', false, function(success)
                                     if success then
                                         TookPackets = TookPackets + 1
@@ -41,7 +41,7 @@ local function Pickup()
                                         end
                                     end
                                 end)
-                            end
+                            end 
                         else
                             lib.notify({ title = 'Error', description = locale("pickup_warning"), type = 'error' })
                         end
@@ -75,6 +75,7 @@ CreateThread(function()
                 label = locale("start_mission"),
                 distance = 2,
                 onSelect = function()
+                    local phonenumber = exports.npwd:getPhoneNumber()
                     if hasStarted then
                         lib.notify({ type = 'info', description = locale("already_havemission") })
                     else
