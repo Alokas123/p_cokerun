@@ -1,3 +1,4 @@
+lib.locale()
 local ConfigServer = require 'config/sv_config'
 local lastPickupCoord = nil
 local hasStarted = false
