@@ -7,7 +7,7 @@
 - Making script overall better
 - Preview
 
-# Feel free to distrupute :)
+# Feel free to contribute:)
 
 # Depencies
 - [ox_lib](https://github.com/overextended/ox_lib)
