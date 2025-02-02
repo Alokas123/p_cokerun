@@ -1,23 +1,13 @@
 lib.locale() -- Initialize locale system
-
 local ConfigServer = require 'config/sv_config'
 local lastPickupCoord = nil
 local hasStarted = false
-local cooldownActive = false
-local cooldownRemaining = 0
+local cooldownEndTime = 0
 
--- Cooldown Timer (Runs every minute)
-CreateThread(function()
-    while true do
-        Wait(60000) -- 1 minute
-        if cooldownRemaining > 0 then
-            cooldownRemaining = cooldownRemaining - 1
-            if cooldownRemaining <= 0 then
-                cooldownActive = false
-            end
-        end
-    end
-end)
+local function isCooldownActive()
+    return os.time() < cooldownEndTime
+end
+
 
 lib.callback.register('location', function()
     return ConfigServer.StartLocation.coords, ConfigServer.StartLocation.heading
@@ -34,14 +24,13 @@ end)
 lib.callback.register('Missionstart', function(source, phonenumber)
     local money = exports.ox_inventory:GetItemCount(source, "money")
 
-    if cooldownActive then
+    if isCooldownActive() then
         return false, "cooldown"
     end
 
     if money >= ConfigServer.MissionCost then
         hasStarted = true
-        cooldownActive = true
-        cooldownRemaining = ConfigServer.CooldownTime
+        cooldownEndTime = os.time() + (ConfigServer.CoolDown * 60) 
 
         lastPickupCoord = ConfigServer.PickupLocations.coords[math.random(1, #ConfigServer.PickupLocations.coords)]
         local message = ConfigServer.PickupLocations.messages[math.random(1, #ConfigServer.PickupLocations.messages)]
